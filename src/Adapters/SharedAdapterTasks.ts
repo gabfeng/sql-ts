@@ -10,7 +10,10 @@ import { EnumDefinition } from './AdapterInterface'
  * @param {Config} config The configuration to use.
  * @returns {Promise<EnumDefinition[]>}
  */
-export async function getTableEnums (db: Knex, config: Config): Promise<EnumDefinition[]> {
+export async function getTableEnums(
+  db: Knex,
+  config: Config
+): Promise<EnumDefinition[]> {
   const tableEnums = config.tableEnums
   const allEnums = Object.entries(tableEnums).map(async ([key, enums]) => {
     const split = key.split('.')
@@ -18,18 +21,17 @@ export async function getTableEnums (db: Knex, config: Config): Promise<EnumDefi
     const table = split[1]
     const rows = (
       await db(table)
+        .withSchema(schema)
         .select(`${enums.key} as Key`, `${enums.value} as Value`)
-      )
-      .reduce((acc, curr) => {
-        acc[curr.Key] = curr.Value
-        return acc
-      }, {}) as { [key: string]: string | number }
+    ).reduce((acc, curr) => {
+      acc[curr.Key] = curr.Value
+      return acc
+    }, {}) as { [key: string]: string | number }
     return {
       name: table,
       schema,
-      values: rows
+      values: rows,
     }
   })
   return await Promise.all(allEnums)
 }
-

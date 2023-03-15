@@ -15,6 +15,7 @@ export interface Config extends Knex.Config {
   folder?: string,
   interfaceNameFormat?: string,
   enumNameFormat?: string,
+  schemaNameCasing?: string,
   tableNameCasing?: string,
   columnNameCasing?: string,
   enumNameCasing?: string,
@@ -59,6 +60,7 @@ export interface Table extends TableDefinition {
   interfaceName: string
   name: string,
   schema: string,
+  schemaName: string,
   columns: Column[]
   extends?: string
   additionalProperties?: string[],

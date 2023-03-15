@@ -10,7 +10,7 @@ export async function getAllEnums (db: Knex, config: Config): Promise<Enum[]> {
   const allEnums = (await adapter.getAllEnums(db, config))
   return allEnums.map(e => ({
     name: e.name,
-    schema: SchemaTasks.generateSchemaName(e.schema),
+    schema: SchemaTasks.generateSchemaName(e.schema, config),
     convertedName: generateEnumName(e.name, config),
     values: Object.keys(e.values).map(ee => ({
       originalKey: ee,

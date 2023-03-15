@@ -26,7 +26,8 @@ export async function getAllTables (db: Knex, config: Config): Promise<Table[]> 
     columns: await ColumnTasks.getColumnsForTable(db, table, config),
     interfaceName: TableTasks.generateInterfaceName(table.name, config),
     name: table.name,
-    schema: SchemaTasks.generateSchemaName(table.schema),
+    schema: table.schema,
+    schemaName: SchemaTasks.generateSchemaName(table.schema, config),
     additionalProperties: TableTasks.getAdditionalProperties(table.name, table.schema, config),
     extends: TableTasks.getExtends(table.name, table.schema, config),
     comment: table.comment

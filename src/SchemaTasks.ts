@@ -1,3 +1,6 @@
+import { Config } from './Typings'
+import * as SharedTasks from './SharedTasks'
+
 /**
  * Generates the schema name, removing invalid values.
  *
@@ -5,9 +8,11 @@
  * @param {string} name Schema name.
  * @returns
  */
-export function generateSchemaName (name: string): string {
+export function generateSchemaName(name: string, config: Config): string {
   if (name == null) return name
-  return name
-    .replace(/\W/g, '')
-    .replace(/^\d+/g, '')
+  else {
+    name = name.replace(/\W/g, '').replace(/^\d+/g, '')
+    name = SharedTasks.convertCase(name, config.schemaNameCasing)
+    return name
+  }
 }

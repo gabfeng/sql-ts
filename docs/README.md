@@ -329,6 +329,23 @@ Valid case values are "pascal" for PascalCase, "camel" for camelCase, "lower" fo
 
 <!-- panels:start -->
 <!-- div:title-panel -->
+### schemaNameCasing
+
+<!-- div:left-panel -->
+Determines the casing for schema names 
+
+<!-- div:right-panel -->
+```json
+{
+  "client": "...",
+  "connection": {},
+  "schemaNameCasing": "pascal"
+}
+```
+
+<!-- div:title-panel -->
+<!-- panels:start -->
+<!-- div:title-panel -->
 ### tableNameCasing
 
 <!-- div:left-panel -->
@@ -714,6 +731,7 @@ The inputs to this file are as followed.
         {
           "name": "User", // The original database table name.
           "schema": "dbo", // The schema the table belongs to.
+          "schemaName": "Dbo", // The converted schema name.
           "additionalProperties": { // Any additional properties that should be added.
             "PropertyName": "number" // Property name and type.
           },

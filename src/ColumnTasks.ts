@@ -127,7 +127,7 @@ export function generateFullColumnName (tableName: string, schemaName: string, c
 export function convertEnumType (column:  ColumnDefinition, config: Config): string {
   const enumName = EnumTasks.generateEnumName(column.type, config)
   if (column.enumSchema != null && config.schemaAsNamespace) {
-    const schemaName = SchemaTasks.generateSchemaName(column.enumSchema)
+    const schemaName = SchemaTasks.generateSchemaName(column.enumSchema, config)
     return `${schemaName}.${enumName}`
   }
   return enumName
